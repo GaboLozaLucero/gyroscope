@@ -163,6 +163,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.1.0"
+  vibrate:
+    dependency: "direct main"
+    description:
+      name: vibrate
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.0.4"
 sdks:
   dart: ">=2.12.0-259.9.beta <3.0.0"
   flutter: ">=1.12.13+hotfix.5"

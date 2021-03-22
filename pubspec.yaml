@@ -30,6 +30,7 @@ dependencies:
   cupertino_icons: ^1.0.0
   get: ^3.26.0
   sensors: ^2.0.0
+  vibrate: ^0.0.4
 
 dev_dependencies:
   flutter_test:

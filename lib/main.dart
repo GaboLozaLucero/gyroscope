@@ -11,6 +11,7 @@ class MyApp extends StatelessWidget {
       title: '60 deg verification',
       home: HomePage(),
       debugShowCheckedModeBanner: false,
+     
     );
   }
 }
