@@ -13,14 +13,14 @@ class groundLinePainter extends CustomPainter {
     pen.strokeCap = StrokeCap.square;
 
     final path = new Path();
-
-    path.moveTo(0, size.height*0.5);
+    final height = (size.height*0.5);
+    path.moveTo(0, height);
     double x=0;
 
     while (x < size.width) {
-      path.lineTo(x+size.width/20, size.height*0.5);
+      path.lineTo(x+size.width/20, height);
       x = x+ size.width/20;
-      path.moveTo(x+size.width/40, size.height*0.5);
+      path.moveTo(x+size.width/40, height);
       
       
     }
@@ -32,6 +32,6 @@ class groundLinePainter extends CustomPainter {
   }
 
   @override
-  bool shouldRepaint(groundLinePainter oldDelegate) => true;
+  bool shouldRepaint(groundLinePainter oldDelegate) => false;
 
 }
