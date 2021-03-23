@@ -15,7 +15,7 @@ class HomeController extends GetxController {
   bool _buttonActivation = false;
   double _limit = 0.022;
   double _lastDegree = 0.0;
-  double _goal = 0.666666667;
+  double _goal = 60/90;
 
   get degrees => _currentDegree;
   get color => _ballColor;
