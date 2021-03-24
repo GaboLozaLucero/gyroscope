@@ -26,21 +26,28 @@ class HomePage extends StatelessWidget {
               ),
               _goal(size),
               _ball(size),
-              Positioned(
-                bottom: size.height * 0.125,
-                right: 10.0,
-                child: GetBuilder<HomeController>(
-                  id: 'btn',
-                  builder: (_) {
-                    return _button();
-                  },
-                ),
-              ),
+              _button(size),
             ],
           ),
         ),
       ),
     );
+  }
+
+  Widget _button(Size size) {
+    return Positioned(
+              bottom: size.height * 0.125,
+              right: 10.0,
+              child: GetBuilder<HomeController>(
+      id: 'btn',
+      builder: (_) {
+        return NextButton(
+        activated: _.buttonActivation,
+        nextPage: CompassPage(),
+        onPressed: ()=>_.click(size));
+      },
+    )
+            );
   }
 
 
@@ -80,15 +87,5 @@ class HomePage extends StatelessWidget {
     );
   }
 
-  Widget _button() {
-    return GetBuilder<HomeController>(
-      id: 'btn',
-      builder: (_) {
-        return NextButton(
-        activated: _.buttonActivation,
-        nextPage: CompassPage(),
-        onPressed: ()=>_.click());
-      },
-    );
-  }
+  
 }

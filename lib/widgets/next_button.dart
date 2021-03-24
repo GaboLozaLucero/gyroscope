@@ -5,7 +5,8 @@ class NextButton extends StatelessWidget {
   final bool activated;
   final Widget nextPage;
   final GestureTapCallback onPressed;
-  NextButton({Key key, @required this.activated, @required this.nextPage, @required this.onPressed}) : super(key: key);
+  final String message ;
+  NextButton({Key key, @required this.activated, @required this.nextPage, @required this.onPressed, this.message = 'Siguiente \nCalibracion'}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -15,14 +16,14 @@ class NextButton extends StatelessWidget {
             ? onPressed
             : null,
         icon: Icon(Icons.check),
-        label: Text('Siguiente \nCalibracion'),
+        label: Text(message),
         style: ButtonStyle(
           padding: MaterialStateProperty.resolveWith <EdgeInsetsGeometry>(
             (Set<MaterialState> states) {
               return EdgeInsets.all(20.0);
             },
           ),
-          backgroundColor: MaterialStateProperty.resolveWith<Color>(
+          backgroundColor: MaterialStateProperty.resolveWith <Color>(
             (Set<MaterialState> states) {
               if (!states.contains(MaterialState.disabled))
                 return Colors.green;

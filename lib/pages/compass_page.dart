@@ -4,14 +4,12 @@ import 'package:degrees/widgets/compass.dart';
 import 'package:degrees/widgets/next_button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/state_manager.dart';
+import 'package:get/get_navigation/get_navigation.dart';
 
 class CompassPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final padding = MediaQuery.of(context).padding;
-    final size0 = MediaQuery.of(context).size;
-    final height = MediaQuery.of(context).size.height - padding.top;
-    final size = Size(size0.width, height);
+    final Size size = Get.arguments[0];
     return GetBuilder<CompassController>(
       init: CompassController(),
       initState: (_) {},
@@ -21,15 +19,7 @@ class CompassPage extends StatelessWidget {
             Center(
               child: compass(size),
             ),
-            Positioned(
-                bottom: size.height * 0.125,
-                right: 10.0,
-                child: GetBuilder<CompassController>(
-                  id: 'btn',
-                  builder: (_) {
-                    return  _button();
-                  },
-                ))
+            _button(size)
           ]),
         );
       },
@@ -48,15 +38,19 @@ class CompassPage extends StatelessWidget {
     );
   }
 
-  Widget _button() {
-    return GetBuilder<CompassController>(
+  Widget _button(Size size) {
+    return Positioned(
+              bottom: size.height * 0.125,
+              right: 10.0,
+              child: GetBuilder<CompassController>(
       id: 'btn',
       builder: (_) {
         return NextButton(
-            activated: _.buttonActivation,
-            nextPage: FinalPage(),
-            onPressed: ()=>_.click());
+        activated: _.buttonActivation,
+        nextPage: FinalPage(),
+        onPressed: ()=>_.click(size));
       },
-    );
+    )
+            );
   }
 }

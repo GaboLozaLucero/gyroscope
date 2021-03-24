@@ -17,22 +17,26 @@ class Compass extends StatelessWidget {
               borderRadius: BorderRadius.circular(1000),
               border: Border.all(width: 2.0, color: Colors.black)),
           child: Center(
-            child: Container(
-              margin: EdgeInsets.zero,
-              padding: EdgeInsets.zero,
-              height: size.height * 0.1,
-              width: size.height * 0.1,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(100),
-                color: Colors.black26,
-              ),
-              child: Center(
-                  child: Text(
-                reading,
-                style: TextStyle(color: color, fontSize: 20.0),
-              )),
-            ),
+            child: _valueBall(),
           ),
         );
+  }
+
+  Widget _valueBall() {
+    return Container(
+            margin: EdgeInsets.zero,
+            padding: EdgeInsets.zero,
+            height: size.height * 0.1,
+            width: size.height * 0.1,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(100),
+              color: Colors.black26,
+            ),
+            child: Center(
+                child: Text(
+              reading,
+              style: TextStyle(color: color, fontSize: 20.0),
+            )),
+          );
   }
 }

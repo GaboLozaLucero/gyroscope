@@ -22,24 +22,30 @@ class HomeController extends GetxController {
   StreamSubscription _flow;
 
 
-  get degrees => _currentDegree;
-  get color => _ballColor;
-  get topPosition => _topPosition;
-  get buttonActivation => _buttonActivation;
-  get subscription => _flow;
+  double get degrees => _currentDegree;
+  Color get color => _ballColor;
+  double get topPosition => _topPosition;
+  bool get buttonActivation => _buttonActivation;
+  StreamSubscription get subscription => _flow;
 
   
 
   void show() async{
     await Vibrate.canVibrate.then((value) {
       _flow = accelerometerEvents.listen((AccelerometerEvent event) {
-        //print(event.y);
+
         double normOfG = math.sqrt(event.x * event.x + event.y * event.y + event.z * event.z);
-      this._currentDegree = yInclination(event.y, normOfG);
+
+        this._currentDegree = yInclination(event.y, normOfG);
+
       if (this._currentDegree>=this._lastDegree+_limit || this._currentDegree <=this._lastDegree-_limit) {
+
         _lastDegree = _currentDegree;
+
       if (this._currentDegree > (_goal-_goal*0.05) && this._currentDegree < (_goal+_goal*0.05)) {
+
         _ballColor = Color.fromRGBO(66, 245, 69, 1);
+        
         Vibrate.feedback(FeedbackType.light);
       
         this._buttonActivation = true;
@@ -83,9 +89,9 @@ class HomeController extends GetxController {
     
   }
  
-  void click(){
+  void click(Size size){
     _flow.cancel().then((value) => 
-    Get.to(()=>CompassPage(), transition: Transition.rightToLeft)
+    Get.off(()=>CompassPage(), transition: Transition.rightToLeft, arguments: [size])
     );
     
   

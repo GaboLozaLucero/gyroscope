@@ -16,10 +16,10 @@ class CompassController extends GetxController {
   StreamSubscription _flow;
 
 
-    get readout => _heading.toStringAsFixed(0) + '° '+octant(_heading);
-    get color => _ballColor;
-    get buttonActivation => _buttonActivation;
-    get subscription => _flow;
+    String get readout => _heading.toStringAsFixed(0) + '° '+octant(_heading);
+    Color get color => _ballColor;
+    bool get buttonActivation => _buttonActivation;
+    StreamSubscription get subscription => _flow;
 
     void gyro(){
     
@@ -27,15 +27,8 @@ class CompassController extends GetxController {
       _lastHeading = event.heading;
       if(this._heading>=this._lastHeading+_limit || this._heading <=this._lastHeading-_limit){
 
-      
       _heading = _lastHeading;
-      
-      // if (_heading <1 && _heading >=0 || _heading <361 && _heading >=358) {
-      //   Vibrate.feedback(FeedbackType.success);
-      //   _ballColor = Colors.greenAccent;
-      //   _buttonActivation = true;
-        
-      // }
+
       if (_heading <=136 && _heading >=134) {
         Vibrate.feedback(FeedbackType.success);
         _ballColor = Colors.greenAccent;
@@ -52,8 +45,23 @@ class CompassController extends GetxController {
 
   }
 
+  @override
+  void onInit() {
+    
+    super.onInit();
+    gyro();
+  }
+
+  void click(Size size){
+    _flow.cancel().then((value) => 
+    Get.off(()=>FinalPage(), transition: Transition.rightToLeft, arguments: [size])
+    );
+  }
+
   String octant(double orientation) {
+
     String resp = '';
+
     if (orientation <= 22 && orientation >=0 ||orientation >= 337) {
       resp = 'N';
     }
@@ -80,22 +88,6 @@ class CompassController extends GetxController {
     }
     return resp;
 
-
   } 
-
-  @override
-  void onInit() {
-    
-    super.onInit();
-    gyro();
-
-  }
-  void click(){
-    _flow.cancel().then((value) => 
-    Get.to(()=>FinalPage(), transition: Transition.rightToLeft)
-    );
-    
-  
-  }
 
 }
