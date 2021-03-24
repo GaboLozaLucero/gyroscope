@@ -1,8 +1,11 @@
+import 'dart:async';
+
+import 'package:degrees/pages/compass_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/state_manager.dart';
 import 'package:sensors/sensors.dart';
 import 'package:vibrate/vibrate.dart';
-
+import 'package:get/route_manager.dart';
 import 'dart:math' as math;
 
 class HomeController extends GetxController {
@@ -16,17 +19,19 @@ class HomeController extends GetxController {
   double _limit = 0.022;
   double _lastDegree = 0.0;
   double _goal = 60/90;
+  StreamSubscription flow;
 
   get degrees => _currentDegree;
   get color => _ballColor;
   get topPosition => _topPosition;
   get buttonActivation => _buttonActivation;
+  
 
   
 
   void show() async{
-    bool canVibrate = await Vibrate.canVibrate.then((value) {
-      accelerometerEvents.listen((AccelerometerEvent event) {
+    await Vibrate.canVibrate.then((value) {
+      flow = accelerometerEvents.listen((AccelerometerEvent event) {
         //print(event.y);
         double normOfG = math.sqrt(event.x * event.x + event.y * event.y + event.z * event.z);
       this._currentDegree = yInclination(event.y, normOfG);
@@ -35,16 +40,17 @@ class HomeController extends GetxController {
       if (this._currentDegree > (_goal-_goal*0.05) && this._currentDegree < (_goal+_goal*0.05)) {
         _ballColor = Color.fromRGBO(66, 245, 69, 1);
         Vibrate.feedback(FeedbackType.light);
+      
         this._buttonActivation = true;
-        update(['btn']);
+        
       
       } else {
         _ballColor = Color.fromRGBO(245, 66, 66, 1);
         this._buttonActivation = false;
-        //this._buttonActivation = false;
+        
       }
       
-      update(['ball']);
+      update(['ball', 'btn']);
       }
       
     });
@@ -54,7 +60,6 @@ class HomeController extends GetxController {
 
   double move(double degrees, Size size){
     this._topPosition = ((size.height/2)*(degrees))+((size.height*0.5))-size.height*0.025;
-    //print('${this._topPosition} - $degrees');  
     return this._topPosition;
 
   }
@@ -62,8 +67,6 @@ class HomeController extends GetxController {
     double y = event / normOfG;
     
     
-    double yInclination = (math.acos(y) * (180 / math.pi));
-    //print('y: $y   acos(y): ${math.acos(y)}   yInclination: $yInclination');
     return y;
   }
 
@@ -74,8 +77,17 @@ class HomeController extends GetxController {
   void onInit() {
 
     super.onInit();
+
     show();
     
+  }
+ 
+  void click(){
+    flow.cancel().then((value) => 
+    Get.to(()=>CompassPage(), transition: Transition.rightToLeft)
+    );
+    
+  
   }
 
   

@@ -10,7 +10,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       title: 'Sensors',
-      home: CompassPage(),
+      home: HomePage(),
       debugShowCheckedModeBanner: false,
      
     );

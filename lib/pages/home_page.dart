@@ -1,6 +1,7 @@
 import 'package:degrees/controllers/home_controller.dart';
 import 'package:degrees/pages/compass_page.dart';
 import 'package:degrees/widgets/groundline.dart';
+import 'package:degrees/widgets/next_button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/state_manager.dart';
 import 'package:get/route_manager.dart';
@@ -114,29 +115,7 @@ class HomePage extends StatelessWidget {
     return GetBuilder<HomeController>(
       id: 'btn',
       builder: (_) {
-        return ElevatedButton.icon(
-          onPressed: _.buttonActivation
-              ? () {
-                  Get.to(()=>CompassPage());
-                }
-              : null,
-          icon: Icon(Icons.check),
-          label: Text('Siguiente \nCalibracion'),
-          style: ButtonStyle(
-            padding: MaterialStateProperty.resolveWith<EdgeInsetsGeometry>(
-              (Set<MaterialState> states) {
-                return EdgeInsets.all(20.0);
-              },
-            ),
-            backgroundColor: MaterialStateProperty.resolveWith<Color>(
-              (Set<MaterialState> states) {
-                if (!states.contains(MaterialState.disabled))
-                  return Colors.green;
-                return null; // Use the component's default.
-              },
-            ),
-          ),
-        );
+        return NextButton(activated: _.buttonActivation, nextPage: CompassPage(), onPressed: ()=> _.click());
       },
     );
   }

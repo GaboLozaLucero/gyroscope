@@ -1,6 +1,9 @@
 import 'package:degrees/controllers/compass_controller.dart';
+import 'package:degrees/pages/final_page.dart';
+import 'package:degrees/widgets/next_button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/state_manager.dart';
+import 'package:get/route_manager.dart';
 
 class CompassPage extends StatelessWidget {
   @override
@@ -14,8 +17,14 @@ class CompassPage extends StatelessWidget {
       initState: (_) {},
       builder: (_) {
         return Scaffold(
-          body: Center(
-            child: compass(size),
+          body: Stack(children: [
+            Center(
+              child: compass(size),
+            ),
+            Positioned(
+              bottom: size.height * 0.125,
+              right: 10.0,
+              child: _button())]
           ),
         );
       },
@@ -38,15 +47,24 @@ class CompassPage extends StatelessWidget {
             child: Container(
               margin: EdgeInsets.zero,
               padding: EdgeInsets.zero,
-              height: size.height * 0.05,
-              width: size.height * 0.05,
+              height: size.height * 0.1,
+              width: size.height * 0.1,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(100),
-                color: _.color,
+                color: Colors.black26,
               ),
+              child: Center(child: Text(_.readout, style: TextStyle(color: _.color, fontSize: 20.0),)),
             ),
           ),
         );
+      },
+    );
+  }
+  Widget _button() {
+    return GetBuilder<CompassController>(
+      id: 'btn',
+      builder: (_) {
+        return NextButton(activated: _.buttonActivation, nextPage: FinalPage(), onPressed: ()=> _.click());
       },
     );
   }
