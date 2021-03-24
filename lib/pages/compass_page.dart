@@ -1,9 +1,9 @@
 import 'package:degrees/controllers/compass_controller.dart';
 import 'package:degrees/pages/final_page.dart';
+import 'package:degrees/widgets/compass.dart';
 import 'package:degrees/widgets/next_button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/state_manager.dart';
-import 'package:get/route_manager.dart';
 
 class CompassPage extends StatelessWidget {
   @override
@@ -22,10 +22,15 @@ class CompassPage extends StatelessWidget {
               child: compass(size),
             ),
             Positioned(
-              bottom: size.height * 0.125,
-              right: 10.0,
-              child: _button())]
-          ),
+                bottom: size.height * 0.125,
+                right: 10.0,
+                child: GetBuilder<CompassController>(
+                  id: 'btn',
+                  builder: (_) {
+                    return  _button();
+                  },
+                ))
+          ]),
         );
       },
     );
@@ -35,36 +40,22 @@ class CompassPage extends StatelessWidget {
     return GetBuilder<CompassController>(
       id: 'compass',
       builder: (_) {
-        return Container(
-          margin: EdgeInsets.zero,
-          padding: EdgeInsets.zero,
-          height: size.height * 0.45,
-          width: size.height * 0.45,
-          decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(1000),
-              border: Border.all(width: 2.0, color: Colors.black)),
-          child: Center(
-            child: Container(
-              margin: EdgeInsets.zero,
-              padding: EdgeInsets.zero,
-              height: size.height * 0.1,
-              width: size.height * 0.1,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(100),
-                color: Colors.black26,
-              ),
-              child: Center(child: Text(_.readout, style: TextStyle(color: _.color, fontSize: 20.0),)),
-            ),
-          ),
-        );
+        return Compass(
+        color: _.color,
+        size: size,
+        reading: _.readout,);
       },
     );
   }
+
   Widget _button() {
     return GetBuilder<CompassController>(
       id: 'btn',
       builder: (_) {
-        return NextButton(activated: _.buttonActivation, nextPage: FinalPage(), onPressed: ()=> _.click());
+        return NextButton(
+            activated: _.buttonActivation,
+            nextPage: FinalPage(),
+            onPressed: ()=>_.click());
       },
     );
   }

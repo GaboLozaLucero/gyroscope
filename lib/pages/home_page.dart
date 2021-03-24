@@ -4,7 +4,7 @@ import 'package:degrees/widgets/groundline.dart';
 import 'package:degrees/widgets/next_button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/state_manager.dart';
-import 'package:get/route_manager.dart';
+
 
 class HomePage extends StatelessWidget {
   @override
@@ -43,37 +43,6 @@ class HomePage extends StatelessWidget {
     );
   }
 
-  // Widget _background(Size size, bool activated) {
-  //   return Column(
-  //     mainAxisAlignment: MainAxisAlignment.end,
-  //     //crossAxisAlignment: CrossAxisAlignment.center,
-  //     children: [
-  //       SizedBox(
-  //         height: 100,
-  //       ),
-  //       Text(
-  //         'Grados: ',
-  //         style: TextStyle(fontSize: 24),
-  //       ),
-  //       SizedBox(
-  //         width: double.infinity,
-  //         height: 5.0,
-  //       ),
-  //       GetBuilder<HomeController>(
-  //         id: 'text',
-  //         builder: (_) {
-  //           return Text(
-  //             _.degrees.toStringAsFixed(2),
-  //             style: TextStyle(fontSize: 24),
-  //           );
-  //         },
-  //       ),
-  //       SizedBox(
-  //         height: 25.0,
-  //       ),
-  //     ],
-  //   );
-  // }
 
   Widget _ball(Size size) {
     return GetBuilder<HomeController>(
@@ -115,7 +84,10 @@ class HomePage extends StatelessWidget {
     return GetBuilder<HomeController>(
       id: 'btn',
       builder: (_) {
-        return NextButton(activated: _.buttonActivation, nextPage: CompassPage(), onPressed: ()=> _.click());
+        return NextButton(
+        activated: _.buttonActivation,
+        nextPage: CompassPage(),
+        onPressed: ()=>_.click());
       },
     );
   }

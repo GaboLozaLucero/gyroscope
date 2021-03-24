@@ -13,15 +13,17 @@ class CompassController extends GetxController {
   double _limit = 1;
   Color _ballColor = Colors.redAccent;
   bool _buttonActivation = false;
-  StreamSubscription flow;
+  StreamSubscription _flow;
 
-    String get readout => _heading.toStringAsFixed(0) + '° '+octant(_heading);
-    Color get color => _ballColor;
-    bool get buttonActivation => _buttonActivation;
 
-  void gyro(){
+    get readout => _heading.toStringAsFixed(0) + '° '+octant(_heading);
+    get color => _ballColor;
+    get buttonActivation => _buttonActivation;
+    get subscription => _flow;
+
+    void gyro(){
     
-    flow = FlutterCompass.events.listen((event) {
+    _flow = FlutterCompass.events.listen((event) {
       _lastHeading = event.heading;
       if(this._heading>=this._lastHeading+_limit || this._heading <=this._lastHeading-_limit){
 
@@ -83,13 +85,13 @@ class CompassController extends GetxController {
 
   @override
   void onInit() {
-    // TODO: implement onInit
+    
     super.onInit();
     gyro();
 
   }
   void click(){
-    flow.cancel().then((value) => 
+    _flow.cancel().then((value) => 
     Get.to(()=>FinalPage(), transition: Transition.rightToLeft)
     );
     
