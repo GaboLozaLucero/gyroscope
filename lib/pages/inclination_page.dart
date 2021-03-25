@@ -1,4 +1,4 @@
-import 'package:degrees/controllers/home_controller.dart';
+import 'package:degrees/controllers/inclination_controller.dart';
 import 'package:degrees/pages/compass_page.dart';
 import 'package:degrees/widgets/groundline.dart';
 import 'package:degrees/widgets/next_button.dart';
@@ -6,16 +6,22 @@ import 'package:flutter/material.dart';
 import 'package:get/state_manager.dart';
 
 
-class HomePage extends StatelessWidget {
+class InclinationPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final padding = MediaQuery.of(context).padding;
+    final appBar = AppBar(
+          title: Text('BestSat'),
+          centerTitle: true,
+          );
     final size0 = MediaQuery.of(context).size;
-    final height = MediaQuery.of(context).size.height - padding.top;
+    final height = MediaQuery.of(context).size.height 
+                  -appBar.preferredSize.height -
+                  MediaQuery.of(context).padding.top;
     final size = Size(size0.width, height);
     return GetBuilder(
-      init: HomeController(),
+      init: InclinationController(),
       builder: (_) => Scaffold(
+        appBar: appBar,
         body: SafeArea(
           child: Stack(
             children: [
@@ -38,7 +44,7 @@ class HomePage extends StatelessWidget {
     return Positioned(
               bottom: size.height * 0.125,
               right: 10.0,
-              child: GetBuilder<HomeController>(
+              child: GetBuilder<InclinationController>(
       id: 'btn',
       builder: (_) {
         return NextButton(
@@ -52,7 +58,7 @@ class HomePage extends StatelessWidget {
 
 
   Widget _ball(Size size) {
-    return GetBuilder<HomeController>(
+    return GetBuilder<InclinationController>(
       id: 'ball',
       builder: (_) => Positioned(
         bottom: _.move(_.degrees, Size(size.width, size.height)),

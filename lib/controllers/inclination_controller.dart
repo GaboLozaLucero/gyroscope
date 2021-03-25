@@ -8,7 +8,7 @@ import 'package:vibrate/vibrate.dart';
 import 'package:get/route_manager.dart';
 import 'dart:math' as math;
 
-class HomeController extends GetxController {
+class InclinationController extends GetxController {
 
   
   

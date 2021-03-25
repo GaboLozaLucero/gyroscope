@@ -1,7 +1,8 @@
 import 'dart:async';
 
-import 'package:degrees/pages/final_page.dart';
+import 'package:degrees/pages/congrats_page.dart';
 import 'package:flutter/material.dart';
+import 'dart:math' as math;
 import 'package:get/state_manager.dart';
 import 'package:get/route_manager.dart';
 import 'package:flutter_compass/flutter_compass.dart';
@@ -13,14 +14,16 @@ class CompassController extends GetxController {
   double _limit = 1;
   Color _ballColor = Colors.redAccent;
   bool _buttonActivation = false;
+  double _angle = 135;
   StreamSubscription _flow;
 
 
     String get readout => _heading.toStringAsFixed(0) + '° '+octant(_heading);
+    double get rotation => _heading*(math.pi / 180) * -1;
     Color get color => _ballColor;
     bool get buttonActivation => _buttonActivation;
     StreamSubscription get subscription => _flow;
-
+    double get angle => (_angle-60)*(math.pi/180);
     void gyro(){
     
     _flow = FlutterCompass.events.listen((event) {
@@ -29,7 +32,7 @@ class CompassController extends GetxController {
 
       _heading = _lastHeading;
 
-      if (_heading <=136 && _heading >=134) {
+      if (_heading <=_angle+3 && _heading >=_angle-3) {
         Vibrate.feedback(FeedbackType.success);
         _ballColor = Colors.greenAccent;
         _buttonActivation = true;
@@ -40,7 +43,7 @@ class CompassController extends GetxController {
         _buttonActivation = false;
         
       }
-      update(['compass', 'btn']);}
+      update(['compass', 'btn', 'goal']);}
     });
 
   }
@@ -49,12 +52,13 @@ class CompassController extends GetxController {
   void onInit() {
     
     super.onInit();
+    print(angle);
     gyro();
   }
 
   void click(Size size){
     _flow.cancel().then((value) => 
-    Get.off(()=>FinalPage(), transition: Transition.rightToLeft, arguments: [size])
+    Get.off(()=>CongratsPage(), transition: Transition.rightToLeft, arguments: [size])
     );
   }
 

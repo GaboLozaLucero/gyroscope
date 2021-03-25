@@ -1,5 +1,4 @@
-
-import 'package:degrees/pages/home_page.dart';
+import 'package:degrees/pages/inclination_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/route_manager.dart';
 
@@ -10,7 +9,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       title: 'Sensors',
-      home: HomePage(),
+      theme: ThemeData(primaryColor: Color.fromRGBO(69, 69, 69, 1)),
+      home: InclinationPage(),
       debugShowCheckedModeBanner: false,
      
     );
