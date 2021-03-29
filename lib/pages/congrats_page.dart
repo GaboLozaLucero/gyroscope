@@ -18,7 +18,7 @@ class CongratsPage extends StatelessWidget {
             activated: true,
             nextPage: InclinationPage(),
             onPressed: () =>
-                Get.off(() => CompassPage(), transition: Transition.zoom),
+                Get.off(() => CompassPage(), transition: Transition.zoom, arguments: [size]),
             message: 'Volver a Empezar',
             size: size,
           )

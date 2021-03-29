@@ -11,7 +11,10 @@ import 'package:get/get_navigation/get_navigation.dart';
 class CompassPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    // Change size value to Get.arguments after refactor this page
+    //final size = Size(411.4, 798.9);
     final Size size = Get.arguments[0];
+
     return GetBuilder<CompassController>(
       init: CompassController(),
       initState: (_) {},
@@ -62,7 +65,7 @@ class CompassPage extends StatelessWidget {
           angle: 1 / (_.angle),
           child: Center(
               child: Container(
-            height: size.height * 0.35,
+            height: size.height * 0.45,
             width: 5,
             decoration: BoxDecoration(
             color: _.color,

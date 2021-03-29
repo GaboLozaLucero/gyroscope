@@ -5,13 +5,14 @@ import 'package:degrees/widgets/next_button.dart';
 import 'package:degrees/widgets/step_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:get/state_manager.dart';
+import 'package:get/route_manager.dart';
 
 class InclinationPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    //TODO : Change size value to Get.arguments after refactor this page
-    //final Size size = Get.arguments[0];
-      final size = Size(411.4, 798.9);
+    //Change size value to Get.arguments after refactor this page
+    final Size size = Get.arguments[0];
+      //final size = Size(411.4, 798.9);
     return GetBuilder(
       init: InclinationController(),
       builder: (_) {
@@ -35,7 +36,10 @@ class InclinationPage extends StatelessWidget {
               Positioned(
                 top: size.height*0.2766,
                 left: size.width*0.1653,
-                              child: Container(
+                child: ClipPath(
+                  clipper: TrapezoidClipper(),
+
+                  child: Container(
                   width: size.width*0.667,
                   height: size.height*0.425,
                   decoration: BoxDecoration(
@@ -43,6 +47,7 @@ class InclinationPage extends StatelessWidget {
                     color: Colors.black
                   ),
                 ),
+                              ),
               ),
               StepIcon(size: size, 
               image: AssetImage('assets/inclination_icon.png'), 
@@ -107,4 +112,21 @@ class InclinationPage extends StatelessWidget {
       ),
     );
   }
+}
+class TrapezoidClipper extends CustomClipper<Path> {
+
+  @override
+  Path getClip(Size size) {
+  Path path = Path()
+  ..lineTo(0, 0)
+  ..lineTo(size.width*0.1875, size.height*0.95)
+  ..quadraticBezierTo(size.width*0.1875, size.height, size.width*0.5, size.height)
+  ..quadraticBezierTo(size.width*0.8125, size.height, size.width*0.8125, size.height*0.95)
+  ..lineTo(size.width, 0)
+  ..lineTo(0, 0);
+  return path;
+  }
+
+  @override
+  bool shouldReclip(CustomClipper<Path> oldClipper) => true;
 }

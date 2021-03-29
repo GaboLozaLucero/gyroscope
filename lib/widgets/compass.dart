@@ -15,13 +15,18 @@ class Compass extends StatelessWidget {
     return Container(
       margin: EdgeInsets.zero,
       padding: EdgeInsets.zero,
-      height: size.height * 0.3,
-      width: size.height * 0.3,
+      height: size.height * 0.4,
+      width: size.height * 0.4,
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(1000),
           border: Border.all(width: 2.0, color: Colors.black)),
-      child: Center(
-        child: _valueBall(),
+      child: Stack(
+
+              children: [
+          Center(child: SvgPicture.asset('assets/cardinal_points.svg'),),
+          Center(
+          child: _valueBall(),
+        ),]
       ),
     );
   }
@@ -33,26 +38,10 @@ class Compass extends StatelessWidget {
         Center(
             child: SvgPicture.asset(
           'assets/compass.svg',
-          height: size.height * 0.20,
+          height: size.height * 0.15,
           color: color,
         )),
-        Center(
-          child: Container(
-            margin: EdgeInsets.zero,
-            padding: EdgeInsets.zero,
-            height: size.height * 0.1,
-            width: size.height * 0.1,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(100),
-              color: Colors.black54,
-            ),
-            child: Center(
-                child: Text(
-              reading,
-              style: TextStyle(color: color, fontSize: 15.0),
-            )),
-          ),
-        ),
+        
       ]),
     );
   }

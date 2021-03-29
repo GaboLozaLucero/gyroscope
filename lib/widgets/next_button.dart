@@ -18,7 +18,7 @@ class NextButton extends StatelessWidget {
       @required this.nextPage,
       @required this.onPressed,
       @required this.size,
-      @required this.flow,
+      this.flow,
       this.message = 'Siguiente Calibracion'})
       : super(key: key);
 
