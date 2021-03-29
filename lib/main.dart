@@ -1,4 +1,4 @@
-import 'package:degrees/pages/compass_page.dart';
+import 'package:degrees/pages/home_page.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       title: 'Sensors',
       theme: ThemeData(primaryColor: Color.fromRGBO(69, 69, 69, 1)),
-      home: CompassPage(),
+      home: HomePage(),
       debugShowCheckedModeBanner: false,
     );
   }

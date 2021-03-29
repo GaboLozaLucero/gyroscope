@@ -24,7 +24,7 @@ class Instructions extends StatelessWidget {
         children: [
           Container(
             margin: EdgeInsets.all(5),
-            height: size.height * 0.15,
+            height: size.height * 0.20,
             width: size.width * 0.25,
             child: Column(
               children: [

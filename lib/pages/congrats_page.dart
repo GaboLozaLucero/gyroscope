@@ -8,6 +8,7 @@ import 'package:get/route_manager.dart';
 class CongratsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    // ignore: unused_local_variable
     final Size size = Get.arguments[0];
     return Scaffold(
       body: SafeArea(

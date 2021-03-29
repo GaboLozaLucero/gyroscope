@@ -27,7 +27,7 @@ class NextButton extends StatelessWidget {
             ),
             OutlinedButton(
               onPressed: () {
-                Get.to(() => HomePage());
+                Get.off(() => HomePage(), transition: Transition.fadeIn);
               },
               child: Text('Menú Principal'),
               style: ButtonStyle(padding:
@@ -72,7 +72,7 @@ class NextButton extends StatelessWidget {
               ), side: MaterialStateProperty.resolveWith<BorderSide>(
                 (Set<MaterialState> states) {
                   if (!states.contains(MaterialState.disabled))
-                    return BorderSide(color: Colors.greenAccent);
+                    return BorderSide(color: Colors.greenAccent, width: 2.0);
                   return null;
                   // Use the component's default.
                 },
@@ -88,7 +88,7 @@ class NextButton extends StatelessWidget {
           ],
         ),
         SizedBox(
-          height: 25,
+          height: 50,
         )
       ],
     );

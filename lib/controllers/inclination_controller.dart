@@ -144,7 +144,7 @@ class InclinationController extends GetxController {
                   text: 'será la orientación adecuada. \n',
                 ),
               ])),
-          assetLocation: 'assets/incination_icon.png'),
+          assetLocation: 'assets/inclination_icon.png'),
     ));
   }
 }

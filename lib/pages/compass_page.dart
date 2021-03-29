@@ -10,35 +10,30 @@ import 'package:get/get_navigation/get_navigation.dart';
 class CompassPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final Size size0 = MediaQuery.of(context).size;
-    final appBar = AppBar(
-      title: Text('BestSat'),
-      centerTitle: true,
-      actions: [
-        IconButton(
-            icon: Icon(Icons.info_outline),
-            onPressed: () {
-              Get.bottomSheet(Container(
-                decoration: BoxDecoration(
-                    borderRadius:
-                        BorderRadius.vertical(top: Radius.circular(20)),
-                    color: Colors.white),
-                child: step1(size0),
-              ));
-            })
-      ],
-    );
-    final height = MediaQuery.of(context).size.height -
-        appBar.preferredSize.height -
-        MediaQuery.of(context).padding.top;
-    final size = Size(size0.width, height);
+    final Size size = Get.arguments[0];
     return GetBuilder<CompassController>(
       init: CompassController(),
       initState: (_) {},
       builder: (_) {
         _.bodySize(size);
         return Scaffold(
-          appBar: appBar,
+          appBar: AppBar(
+            title: Text('BestSat'),
+            centerTitle: true,
+            actions: [
+              IconButton(
+                  icon: Icon(Icons.info_outline),
+                  onPressed: () {
+                    Get.bottomSheet(Container(
+                      decoration: BoxDecoration(
+                          borderRadius:
+                              BorderRadius.vertical(top: Radius.circular(20)),
+                          color: Colors.white),
+                      child: step1(size),
+                    ));
+                  })
+            ],
+          ),
           body: Stack(children: [
             _goal(size),
             Column(
