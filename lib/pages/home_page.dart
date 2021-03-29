@@ -82,8 +82,8 @@ class HomePage extends StatelessWidget {
     return InkWell(
       onTap: onPressed,
       child: Container(
-        height: size.height * 0.25,
-        width: size.height * 0.25,
+        height: size.height * 0.22,
+        width: size.height * 0.22,
         decoration: BoxDecoration(
             border: Border.all(color: Colors.grey[200]),
             color: Colors.white,

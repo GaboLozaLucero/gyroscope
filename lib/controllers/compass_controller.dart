@@ -123,15 +123,15 @@ class CompassController extends GetxController {
                     style: TextStyle(fontWeight: FontWeight.bold),
                   ),
                   TextSpan(
-                    text: 'concida con la \n',
+                    text: 'concida con la ',
                   ),
                   TextSpan(
-                    text: 'linea roja ',
+                    text: 'linea roja. ',
                     style: TextStyle(
                         fontWeight: FontWeight.bold, color: Colors.red),
                   ),
                   TextSpan(
-                    text: 'cuando la ',
+                    text: 'Cuando la ',
                   ),
                   TextSpan(
                     text: 'linea roja ',
