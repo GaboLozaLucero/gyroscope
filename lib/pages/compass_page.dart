@@ -2,8 +2,8 @@ import 'package:degrees/controllers/compass_controller.dart';
 import 'package:degrees/pages/congrats_page.dart';
 import 'package:degrees/widgets/background_border.dart';
 import 'package:degrees/widgets/compass.dart';
-import 'package:degrees/widgets/instructions.dart';
 import 'package:degrees/widgets/next_button.dart';
+import 'package:degrees/widgets/step_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:get/state_manager.dart';
 import 'package:get/get_navigation/get_navigation.dart';
@@ -30,7 +30,14 @@ class CompassPage extends StatelessWidget {
             ],
           ),
           body: Stack(children: [
-            BackgroundBorder(size: size),
+            
+          BackgroundBorder(size: size),
+          StepIcon(
+          size: size, 
+          step: 1,
+          image: AssetImage('assets/compass_icon.png'),
+          onTap: (){_.instructions(size);},
+          ),
             _goal(size),
             Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -95,62 +102,12 @@ class CompassPage extends StatelessWidget {
             nextPage: CongratsPage(),
             message: _.buttonText,
             size: size,
+            flow: _.subscription,
             onPressed: () => _.click(size));
       },
     );
   }
-
-  Widget step1(Size size) {
-    return Instructions(
-        step: 1,
-        title: 'Brújula',
-        size: size,
-        instruction: RichText(
-            text: TextSpan(
-                text: 'Pon el celular',
-                style: TextStyle(color: Colors.black),
-                children: <TextSpan>[
-              TextSpan(
-                text: 'sobre la antena ',
-                style: TextStyle(fontWeight: FontWeight.bold),
-              ),
-              TextSpan(
-                text: 'y haz que la ',
-              ),
-              TextSpan(
-                text: 'punta de la flecha ',
-                style: TextStyle(fontWeight: FontWeight.bold),
-              ),
-              TextSpan(
-                text: 'concida con la \n',
-              ),
-              TextSpan(
-                text: 'linea roja ',
-                style:
-                    TextStyle(fontWeight: FontWeight.bold, color: Colors.red),
-              ),
-              TextSpan(
-                text: 'cuando la ',
-              ),
-              TextSpan(
-                text: 'linea roja ',
-                style:
-                    TextStyle(fontWeight: FontWeight.bold, color: Colors.red),
-              ),
-              TextSpan(
-                text: 'se ponga ',
-              ),
-              TextSpan(
-                text: 'VERDE ',
-                style: TextStyle(
-                    fontWeight: FontWeight.bold, color: Colors.greenAccent),
-              ),
-              TextSpan(
-                text: 'será la orientación adecuada. \n',
-              ),
-            ])),
-        assetLocation: 'assets/compass_icon.png');
-  }
 }
+
 
 

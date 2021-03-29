@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:degrees/pages/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/route_manager.dart';
@@ -8,12 +10,15 @@ class NextButton extends StatelessWidget {
   final GestureTapCallback onPressed;
   final String message;
   final Size size;
+  final StreamSubscription flow;
+
   NextButton(
       {Key key,
       @required this.activated,
       @required this.nextPage,
       @required this.onPressed,
       @required this.size,
+      @required this.flow,
       this.message = 'Siguiente Calibracion'})
       : super(key: key);
 
@@ -29,7 +34,11 @@ class NextButton extends StatelessWidget {
             ),
             OutlinedButton(
               onPressed: () {
-                Get.off(() => HomePage(), transition: Transition.fadeIn);
+                if (flow!=null) 
+                {flow.cancel().then((value) => Get.off(() => HomePage(), transition: Transition.fadeIn));}
+                else{
+                  Get.off(() => HomePage(), transition: Transition.fadeIn);
+                }
               },
               child: Text('Menú Principal'),
               style: ButtonStyle(padding:

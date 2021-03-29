@@ -19,6 +19,7 @@ class InclinationController extends GetxController {
   double _lastDegree = 0.0;
   double _goal = 60 / 90;
   String _btnText = 'Inclina más';
+  Size _size;
   StreamSubscription _flow;
 
   double get degrees => _currentDegree;
@@ -27,7 +28,8 @@ class InclinationController extends GetxController {
   bool get buttonActivation => _buttonActivation;
   StreamSubscription get subscription => _flow;
   String get buttonText => _btnText;
-
+  void bodySize(Size size) => _size = size;
+  
   void show() async {
     await Vibrate.canVibrate.then((value) {
       _flow = accelerometerEvents.listen((AccelerometerEvent event) {
@@ -90,7 +92,7 @@ class InclinationController extends GetxController {
   @override
   void onReady() {
     super.onReady();
-    instructions(Get.arguments[0]);
+    instructions(_size);
   }
 
   void click(Size size) {

@@ -1,21 +1,22 @@
 import 'package:degrees/controllers/inclination_controller.dart';
 import 'package:degrees/pages/compass_page.dart';
 import 'package:degrees/widgets/background_border.dart';
-import 'package:degrees/widgets/groundline.dart';
 import 'package:degrees/widgets/next_button.dart';
+import 'package:degrees/widgets/step_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:get/state_manager.dart';
-import 'package:get/get_navigation/get_navigation.dart';
 
 class InclinationPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     //TODO : Change size value to Get.arguments after refactor this page
-    final Size size = Get.arguments[0];
-      // final size = Size(411.4, 798.9);
+    //final Size size = Get.arguments[0];
+      final size = Size(411.4, 798.9);
     return GetBuilder(
       init: InclinationController(),
-      builder: (_) => Scaffold(
+      builder: (_) {
+        _.bodySize(size);
+         return Scaffold(
         appBar: AppBar(
           title: Text('BestSat', style: TextStyle(fontSize: 20),),
           centerTitle: true,
@@ -29,7 +30,7 @@ class InclinationPage extends StatelessWidget {
         ),
         body: SafeArea(
           child: Stack(
-            children: [
+            children: [           
               BackgroundBorder(size: size),
               Positioned(
                 top: size.height*0.2766,
@@ -43,13 +44,16 @@ class InclinationPage extends StatelessWidget {
                   ),
                 ),
               ),
+              StepIcon(size: size, 
+              image: AssetImage('assets/inclination_icon.png'), 
+              step: 2, onTap: ()=>_.instructions(size)),
               _goal(size),
               _ball(size),
               _button(size),
             ],
           ),
         ),
-      ),
+      );}
     );
   }
 
@@ -62,6 +66,7 @@ class InclinationPage extends StatelessWidget {
             message: _.buttonText,
             nextPage: CompassPage(),
             size: size,
+            flow: _.subscription,
             onPressed: () => _.click(size));
       },
     );
