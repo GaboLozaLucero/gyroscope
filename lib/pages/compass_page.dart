@@ -1,5 +1,6 @@
 import 'package:degrees/controllers/compass_controller.dart';
 import 'package:degrees/pages/congrats_page.dart';
+import 'package:degrees/widgets/background_border.dart';
 import 'package:degrees/widgets/compass.dart';
 import 'package:degrees/widgets/instructions.dart';
 import 'package:degrees/widgets/next_button.dart';
@@ -18,23 +19,18 @@ class CompassPage extends StatelessWidget {
         _.bodySize(size);
         return Scaffold(
           appBar: AppBar(
-            title: Text('BestSat'),
+            title: Text('BestSat', style: TextStyle(fontSize: 20),),
             centerTitle: true,
             actions: [
               IconButton(
                   icon: Icon(Icons.info_outline),
                   onPressed: () {
-                    Get.bottomSheet(Container(
-                      decoration: BoxDecoration(
-                          borderRadius:
-                              BorderRadius.vertical(top: Radius.circular(20)),
-                          color: Colors.white),
-                      child: step1(size),
-                    ));
+                    _.instructions(size);
                   })
             ],
           ),
           body: Stack(children: [
+            BackgroundBorder(size: size),
             _goal(size),
             Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -59,9 +55,17 @@ class CompassPage extends StatelessWidget {
           angle: 1 / (_.angle),
           child: Center(
               child: Container(
-            height: size.height * 0.6,
+            height: size.height * 0.35,
             width: 5,
+            decoration: BoxDecoration(
             color: _.color,
+            gradient: LinearGradient(
+            colors: [Colors.yellow,_.color,],
+            stops: [0.5, 0.5],
+            begin: FractionalOffset.topCenter,
+            end: FractionalOffset.bottomCenter
+          )
+            ),
           )),
         );
       },
@@ -90,6 +94,7 @@ class CompassPage extends StatelessWidget {
             activated: _.buttonActivation,
             nextPage: CongratsPage(),
             message: _.buttonText,
+            size: size,
             onPressed: () => _.click(size));
       },
     );
@@ -147,3 +152,5 @@ class CompassPage extends StatelessWidget {
         assetLocation: 'assets/compass_icon.png');
   }
 }
+
+

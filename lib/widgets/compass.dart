@@ -15,8 +15,8 @@ class Compass extends StatelessWidget {
     return Container(
       margin: EdgeInsets.zero,
       padding: EdgeInsets.zero,
-      height: size.height * 0.45,
-      width: size.height * 0.45,
+      height: size.height * 0.3,
+      width: size.height * 0.3,
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(1000),
           border: Border.all(width: 2.0, color: Colors.black)),

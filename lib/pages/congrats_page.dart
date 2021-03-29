@@ -20,6 +20,7 @@ class CongratsPage extends StatelessWidget {
             onPressed: () =>
                 Get.off(() => CompassPage(), transition: Transition.zoom),
             message: 'Volver a Empezar',
+            size: size,
           )
         ]),
       ),

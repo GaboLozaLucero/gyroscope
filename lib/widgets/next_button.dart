@@ -7,11 +7,13 @@ class NextButton extends StatelessWidget {
   final Widget nextPage;
   final GestureTapCallback onPressed;
   final String message;
+  final Size size;
   NextButton(
       {Key key,
       @required this.activated,
       @required this.nextPage,
       @required this.onPressed,
+      @required this.size,
       this.message = 'Siguiente Calibracion'})
       : super(key: key);
 
@@ -23,7 +25,7 @@ class NextButton extends StatelessWidget {
         Row(
           children: [
             SizedBox(
-              width: 35,
+              width: size.width*0.1655,
             ),
             OutlinedButton(
               onPressed: () {
@@ -33,7 +35,7 @@ class NextButton extends StatelessWidget {
               style: ButtonStyle(padding:
                   MaterialStateProperty.resolveWith<EdgeInsetsGeometry>(
                 (Set<MaterialState> states) {
-                  return EdgeInsets.all(10.0);
+                  return EdgeInsets.symmetric(vertical : size.height*0.0123, horizontal: size.width*0.03);
                 },
               ), foregroundColor: MaterialStateProperty.resolveWith<Color>(
                 (Set<MaterialState> states) {
@@ -49,19 +51,25 @@ class NextButton extends StatelessWidget {
                 (Set<MaterialState> states) {
                   return StadiumBorder();
                 },
-              )),
+              ),
+              minimumSize: MaterialStateProperty.resolveWith<Size>(
+                (states){
+                  return Size(size.width*0.32, size.height*0.0525);
+                },
+              ),
+              ),
             ),
             Expanded(
               child: SizedBox(),
             ),
-            OutlinedButton.icon(
+            OutlinedButton(
               onPressed: activated ? onPressed : null,
-              icon: Icon(Icons.check),
-              label: Text(message),
+              
+              child: Text(message),
               style: ButtonStyle(padding:
                   MaterialStateProperty.resolveWith<EdgeInsetsGeometry>(
                 (Set<MaterialState> states) {
-                  return EdgeInsets.all(5.0);
+                  return EdgeInsets.symmetric(vertical : size.height*0.0123, horizontal: size.width*0.03);
                 },
               ), foregroundColor: MaterialStateProperty.resolveWith<Color>(
                 (Set<MaterialState> states) {
@@ -80,15 +88,21 @@ class NextButton extends StatelessWidget {
                 (Set<MaterialState> states) {
                   return StadiumBorder();
                 },
-              )),
+              ),
+              minimumSize: MaterialStateProperty.resolveWith<Size>(
+                (states){
+                  return Size(size.width*0.32, size.height*0.0525);
+                },
+              ),
+              ),
             ),
             SizedBox(
-              width: 25,
+              width: size.width*0.1655,
             ),
           ],
         ),
         SizedBox(
-          height: 50,
+          height: size.height*0.094,
         )
       ],
     );

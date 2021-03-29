@@ -1,7 +1,7 @@
 import 'package:degrees/controllers/inclination_controller.dart';
 import 'package:degrees/pages/compass_page.dart';
+import 'package:degrees/widgets/background_border.dart';
 import 'package:degrees/widgets/groundline.dart';
-
 import 'package:degrees/widgets/next_button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/state_manager.dart';
@@ -10,13 +10,14 @@ import 'package:get/get_navigation/get_navigation.dart';
 class InclinationPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    //TODO : Change size value to Get.arguments after refactor this page
     final Size size = Get.arguments[0];
-
+      // final size = Size(411.4, 798.9);
     return GetBuilder(
       init: InclinationController(),
       builder: (_) => Scaffold(
         appBar: AppBar(
-          title: Text('BestSat'),
+          title: Text('BestSat', style: TextStyle(fontSize: 20),),
           centerTitle: true,
           actions: [
             IconButton(
@@ -29,10 +30,18 @@ class InclinationPage extends StatelessWidget {
         body: SafeArea(
           child: Stack(
             children: [
-              //_background(size, _.buttonActivation),
-              CustomPaint(
-                painter: groundLinePainter(),
-                size: size,
+              BackgroundBorder(size: size),
+              Positioned(
+                top: size.height*0.2766,
+                left: size.width*0.1653,
+                              child: Container(
+                  width: size.width*0.667,
+                  height: size.height*0.425,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    color: Colors.black
+                  ),
+                ),
               ),
               _goal(size),
               _ball(size),
@@ -52,6 +61,7 @@ class InclinationPage extends StatelessWidget {
             activated: _.buttonActivation,
             message: _.buttonText,
             nextPage: CompassPage(),
+            size: size,
             onPressed: () => _.click(size));
       },
     );
@@ -62,7 +72,7 @@ class InclinationPage extends StatelessWidget {
       id: 'ball',
       builder: (_) => Positioned(
         bottom: _.move(_.degrees, Size(size.width, size.height)),
-        left: (size.width * 0.5) - (size.height * 0.025),
+        left: (size.width * 0.5) - (size.height * 0.02766),
         child: Container(
           margin: EdgeInsets.zero,
           padding: EdgeInsets.zero,
@@ -79,8 +89,8 @@ class InclinationPage extends StatelessWidget {
 
   Widget _goal(Size size) {
     return Positioned(
-      top: (size.height * 0.125),
-      left: (size.width * 0.5) - (size.height * 0.035),
+      top: (size.height * 0.125+size.height*0.265),
+      left: (size.width * 0.5) - (size.height * 0.038),
       child: Container(
         margin: EdgeInsets.zero,
         padding: EdgeInsets.zero,
@@ -88,7 +98,7 @@ class InclinationPage extends StatelessWidget {
         width: size.height * 0.07,
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(100),
-            border: Border.all(width: 2.0, color: Colors.black)),
+            border: Border.all(width: 2.0, color: Colors.white)),
       ),
     );
   }

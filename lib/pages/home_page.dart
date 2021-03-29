@@ -8,18 +8,19 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     final Size size0 = MediaQuery.of(context).size;
     final appBar = AppBar(
-      title: Text('BestSat'),
+      title: Text('BestSat', style: TextStyle(fontSize: 20),),
       centerTitle: true,
     );
     final height = MediaQuery.of(context).size.height -
         appBar.preferredSize.height -
         MediaQuery.of(context).padding.top;
     final size = Size(size0.width, height);
+    //print(size);
     return Scaffold(
       appBar: appBar,
       body: Container(
         padding:
-            EdgeInsets.symmetric(horizontal: 20.0, vertical: size.height * 0.1),
+            EdgeInsets.symmetric(horizontal: size.width*0.069, vertical: size.height * 0.091),
         child: Column(
           children: [
             Row(
@@ -27,7 +28,7 @@ class HomePage extends StatelessWidget {
               children: [
                 _menuButton('assets/satellite_dish.png', 'Alinear Antena', size,
                     () {
-                  Get.off(() => CompassPage(),
+                  Get.to(() => CompassPage(),
                       transition: Transition.rightToLeft, arguments: [size]);
                 }),
                 Expanded(
@@ -39,7 +40,7 @@ class HomePage extends StatelessWidget {
               ],
             ),
             SizedBox(
-              height: size.height * 0.05,
+              height: size.height * 0.055,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -55,14 +56,14 @@ class HomePage extends StatelessWidget {
               ],
             ),
             SizedBox(
-              height: size.height * 0.1,
+              height: size.height * 0.093,
             ),
             OutlinedButton(
               onPressed: () {},
               child: Text('Ver tutorial'),
               style: ButtonStyle(
                 minimumSize:
-                    MaterialStateProperty.all<Size>(Size(double.infinity, 35)),
+                    MaterialStateProperty.all<Size>(Size(double.infinity, size.height*0.0525)),
                 foregroundColor:
                     MaterialStateProperty.all<Color>(Colors.greenAccent),
                 side: MaterialStateProperty.all<BorderSide>(
@@ -82,28 +83,32 @@ class HomePage extends StatelessWidget {
     return InkWell(
       onTap: onPressed,
       child: Container(
-        height: size.height * 0.22,
-        width: size.height * 0.22,
+        height: size.height * 0.3042,
+        width: size.width * 0.4,
         decoration: BoxDecoration(
             border: Border.all(color: Colors.grey[200]),
             color: Colors.white,
             borderRadius: BorderRadius.circular(20)),
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Image(
               image: AssetImage(asset),
-              height: 120,
+              height: size.height*0.11,
+            ),
+            SizedBox(
+              height: size.height* 0.03,
             ),
             Text(
               description,
               textAlign: TextAlign.center,
               style: TextStyle(
-                fontSize: 15,
+                fontSize: 16,
               ),
             ),
             SizedBox(
-              height: 15,
+              height: size.height* 0.047,
             )
           ],
         ),

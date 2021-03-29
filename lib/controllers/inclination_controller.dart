@@ -61,9 +61,16 @@ class InclinationController extends GetxController {
   }
 
   double move(double degrees, Size size) {
-    this._topPosition = ((size.height / 2) * (degrees)) +
-        ((size.height * 0.5)) -
-        size.height * 0.025;
+    if (degrees>=0) {
+      this._topPosition = ((size.height *0.375) * (degrees)) +
+        size.height * 0.025+size.height*0.2766;
+    }else{
+      this._topPosition = 
+        size.height * 0.025+size.height*0.2766;
+    }
+
+    
+    
     return this._topPosition;
   }
 
