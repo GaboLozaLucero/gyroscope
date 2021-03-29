@@ -1,7 +1,9 @@
 import 'dart:async';
 
-import 'package:degrees/pages/compass_page.dart';
+import 'package:degrees/pages/congrats_page.dart';
+import 'package:degrees/widgets/instructions.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:get/state_manager.dart';
 import 'package:sensors/sensors.dart';
 import 'package:vibrate/vibrate.dart';
@@ -9,93 +11,140 @@ import 'package:get/route_manager.dart';
 import 'dart:math' as math;
 
 class InclinationController extends GetxController {
-
-  
-  
   double _currentDegree = 0.0;
   Color _ballColor = Color.fromRGBO(245, 66, 66, 1);
   double _topPosition = 0.0;
   bool _buttonActivation = false;
   double _limit = 0.022;
   double _lastDegree = 0.0;
-  double _goal = 60/90;
+  double _goal = 60 / 90;
+  String _btnText = 'Inclina más';
   StreamSubscription _flow;
-
 
   double get degrees => _currentDegree;
   Color get color => _ballColor;
   double get topPosition => _topPosition;
   bool get buttonActivation => _buttonActivation;
   StreamSubscription get subscription => _flow;
+  String get buttonText => _btnText;
 
-  
-
-  void show() async{
+  void show() async {
     await Vibrate.canVibrate.then((value) {
       _flow = accelerometerEvents.listen((AccelerometerEvent event) {
-
-        double normOfG = math.sqrt(event.x * event.x + event.y * event.y + event.z * event.z);
+        double normOfG = math
+            .sqrt(event.x * event.x + event.y * event.y + event.z * event.z);
 
         this._currentDegree = yInclination(event.y, normOfG);
 
-      if (this._currentDegree>=this._lastDegree+_limit || this._currentDegree <=this._lastDegree-_limit) {
+        if (this._currentDegree >= this._lastDegree + _limit ||
+            this._currentDegree <= this._lastDegree - _limit) {
+          _lastDegree = _currentDegree;
 
-        _lastDegree = _currentDegree;
+          if (this._currentDegree > (_goal - _goal * 0.05) &&
+              this._currentDegree < (_goal + _goal * 0.05)) {
+            _ballColor = Color.fromRGBO(66, 245, 69, 1);
 
-      if (this._currentDegree > (_goal-_goal*0.05) && this._currentDegree < (_goal+_goal*0.05)) {
+            Vibrate.feedback(FeedbackType.light);
 
-        _ballColor = Color.fromRGBO(66, 245, 69, 1);
-        
-        Vibrate.feedback(FeedbackType.light);
-      
-        this._buttonActivation = true;
-        
-      
-      } else {
-        _ballColor = Color.fromRGBO(245, 66, 66, 1);
-        this._buttonActivation = false;
-        
-      }
-      
-      update(['ball', 'btn']);
-      }
-      
+            this._buttonActivation = true;
+            _btnText = 'Terminar';
+          } else {
+            _ballColor = Color.fromRGBO(245, 66, 66, 1);
+            this._buttonActivation = false;
+            _btnText = 'Inclina más';
+          }
+
+          update(['ball', 'btn']);
+        }
+      });
     });
-    });
-    
   }
 
-  double move(double degrees, Size size){
-    this._topPosition = ((size.height/2)*(degrees))+((size.height*0.5))-size.height*0.025;
+  double move(double degrees, Size size) {
+    this._topPosition = ((size.height / 2) * (degrees)) +
+        ((size.height * 0.5)) -
+        size.height * 0.025;
     return this._topPosition;
-
   }
-  double yInclination(double event, double normOfG){
+
+  double yInclination(double event, double normOfG) {
     double y = event / normOfG;
-    
-    
+
     return y;
   }
 
-
-  
-
   @override
   void onInit() {
-
     super.onInit();
 
     show();
-    
-  }
- 
-  void click(Size size){
-    _flow.cancel().then((value) => 
-    Get.off(()=>CompassPage(), transition: Transition.rightToLeft, arguments: [size])
-    );
-    
-  
   }
 
-  
+  @override
+  void onReady() {
+    super.onReady();
+    instructions(Get.arguments[0]);
+  }
+
+  void click(Size size) {
+    _flow.cancel().then((value) => Get.off(() => CongratsPage(),
+        transition: Transition.rightToLeft, arguments: [size]));
+  }
+
+  void instructions(Size size) {
+    Get.bottomSheet(Container(
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+          color: Colors.white),
+      child: Instructions(
+          step: 2,
+          title: 'Giroscopio ',
+          size: size,
+          instruction: RichText(
+              text: TextSpan(
+                  text: 'Pon el celular ',
+                  style: TextStyle(color: Colors.black),
+                  children: <TextSpan>[
+                TextSpan(
+                  text: 'sobre la antena ',
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
+                TextSpan(
+                  text: 'e inclina tu celular para hacer que el ',
+                ),
+                TextSpan(
+                  text: 'círculo rojo ',
+                  style:
+                      TextStyle(fontWeight: FontWeight.bold, color: Colors.red),
+                ),
+                TextSpan(
+                  text: 'concida con la ',
+                ),
+                TextSpan(
+                  text: 'meta, ',
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
+                TextSpan(
+                  text: 'cuando el ',
+                ),
+                TextSpan(
+                  text: 'círculo rojo ',
+                  style:
+                      TextStyle(fontWeight: FontWeight.bold, color: Colors.red),
+                ),
+                TextSpan(
+                  text: 'se ponga ',
+                ),
+                TextSpan(
+                  text: 'verde ',
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold, color: Colors.greenAccent),
+                ),
+                TextSpan(
+                  text: 'será la orientación adecuada. \n',
+                ),
+              ])),
+          assetLocation: 'assets/incination_icon.png'),
+    ));
+  }
 }

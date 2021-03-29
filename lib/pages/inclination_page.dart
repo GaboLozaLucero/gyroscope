@@ -1,27 +1,31 @@
 import 'package:degrees/controllers/inclination_controller.dart';
 import 'package:degrees/pages/compass_page.dart';
 import 'package:degrees/widgets/groundline.dart';
+
 import 'package:degrees/widgets/next_button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/state_manager.dart';
-
+import 'package:get/get_navigation/get_navigation.dart';
 
 class InclinationPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final appBar = AppBar(
-          title: Text('BestSat'),
-          centerTitle: true,
-          );
-    final size0 = MediaQuery.of(context).size;
-    final height = MediaQuery.of(context).size.height 
-                  -appBar.preferredSize.height -
-                  MediaQuery.of(context).padding.top;
-    final size = Size(size0.width, height);
+    final Size size = Get.arguments[0];
+
     return GetBuilder(
       init: InclinationController(),
       builder: (_) => Scaffold(
-        appBar: appBar,
+        appBar: AppBar(
+          title: Text('BestSat'),
+          centerTitle: true,
+          actions: [
+            IconButton(
+                icon: Icon(Icons.info_outline),
+                onPressed: () {
+                  _.instructions(size);
+                })
+          ],
+        ),
         body: SafeArea(
           child: Stack(
             children: [
@@ -41,21 +45,17 @@ class InclinationPage extends StatelessWidget {
   }
 
   Widget _button(Size size) {
-    return Positioned(
-              bottom: size.height * 0.125,
-              right: 10.0,
-              child: GetBuilder<InclinationController>(
+    return GetBuilder<InclinationController>(
       id: 'btn',
       builder: (_) {
         return NextButton(
-        activated: _.buttonActivation,
-        nextPage: CompassPage(),
-        onPressed: ()=>_.click(size));
+            activated: _.buttonActivation,
+            message: _.buttonText,
+            nextPage: CompassPage(),
+            onPressed: () => _.click(size));
       },
-    )
-            );
+    );
   }
-
 
   Widget _ball(Size size) {
     return GetBuilder<InclinationController>(
@@ -92,6 +92,4 @@ class InclinationPage extends StatelessWidget {
       ),
     );
   }
-
-  
 }
