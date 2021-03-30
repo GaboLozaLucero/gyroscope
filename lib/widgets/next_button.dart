@@ -35,33 +35,37 @@ class NextButton extends StatelessWidget {
             OutlinedButton(
               onPressed: () {
                 if (flow!=null) 
-                {flow.cancel().then((value) => Get.off(() => HomePage(), transition: Transition.fadeIn));}
+                {flow.cancel().then((value) => Get.offAll(() => HomePage(), transition: Transition.fadeIn));}
                 else{
-                  Get.off(() => HomePage(), transition: Transition.fadeIn);
+                  Get.offAll(() => HomePage(), transition: Transition.fadeIn);
                 }
               },
               child: Text('Menú Principal'),
-              style: ButtonStyle(padding:
+              style: ButtonStyle(
+                padding:
                   MaterialStateProperty.resolveWith<EdgeInsetsGeometry>(
-                (Set<MaterialState> states) {
+                (states) {
                   return EdgeInsets.symmetric(vertical : size.height*0.0123, horizontal: size.width*0.03);
                 },
-              ), foregroundColor: MaterialStateProperty.resolveWith<Color>(
-                (Set<MaterialState> states) {
+              ), 
+                foregroundColor: MaterialStateProperty.resolveWith<Color>(
+                (states) {
                   return Colors.black;
                   // Use the component's default.
                 },
-              ), side: MaterialStateProperty.resolveWith<BorderSide>(
-                (Set<MaterialState> states) {
+              ), 
+                side: MaterialStateProperty.resolveWith<BorderSide>(
+                (states) {
                   return BorderSide(color: Colors.black);
                   // Use the component's default.
                 },
-              ), shape: MaterialStateProperty.resolveWith<OutlinedBorder>(
-                (Set<MaterialState> states) {
+              ), 
+                shape: MaterialStateProperty.resolveWith<OutlinedBorder>(
+                (states) {
                   return StadiumBorder();
                 },
               ),
-              minimumSize: MaterialStateProperty.resolveWith<Size>(
+                minimumSize: MaterialStateProperty.resolveWith<Size>(
                 (states){
                   return Size(size.width*0.32, size.height*0.0525);
                 },

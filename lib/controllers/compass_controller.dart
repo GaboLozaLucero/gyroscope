@@ -1,7 +1,7 @@
 import 'dart:async';
-
 import 'package:degrees/pages/inclination_page.dart';
 import 'package:degrees/widgets/instructions.dart';
+import 'package:degrees/widgets/instructions_text_span.dart';
 import 'package:flutter/material.dart';
 import 'dart:math' as math;
 import 'package:get/state_manager.dart';
@@ -28,6 +28,8 @@ class CompassController extends GetxController {
   StreamSubscription get subscription => _flow;
   double get angle => (_angle - 60) * (math.pi / 180);
   void bodySize(Size size) => _size = size;
+
+
   void gyro() {
     _flow = FlutterCompass.events.listen((event) {
       _lastHeading = event.heading;
@@ -107,49 +109,24 @@ class CompassController extends GetxController {
             title: 'Brújula',
             size: size,
             instruction: RichText(
+              textAlign: TextAlign.justify,
                 text: TextSpan(
-                    text: 'Pon el celular',
+                    text: 'Pon el celular ',
                     style: TextStyle(color: Colors.black),
                     children: <TextSpan>[
-                  TextSpan(
-                    text: 'sobre la antena ',
-                    style: TextStyle(fontWeight: FontWeight.bold),
-                  ),
-                  TextSpan(
-                    text: 'y haz que la ',
-                  ),
-                  TextSpan(
-                    text: 'punta de la flecha ',
-                    style: TextStyle(fontWeight: FontWeight.bold),
-                  ),
-                  TextSpan(
-                    text: 'concida con la ',
-                  ),
-                  TextSpan(
-                    text: 'linea roja. ',
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold, color: Colors.red),
-                  ),
-                  TextSpan(
-                    text: 'Cuando la ',
-                  ),
-                  TextSpan(
-                    text: 'linea roja ',
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold, color: Colors.red),
-                  ),
-                  TextSpan(
-                    text: 'se ponga ',
-                  ),
-                  TextSpan(
-                    text: 'VERDE ',
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold, color: Colors.greenAccent),
-                  ),
-                  TextSpan(
-                    text: 'será la orientación adecuada. \n',
-                  ),
-                ])),
+                  InstructionsTextSpan().boldText('sobre la antena '),
+                  InstructionsTextSpan().regularText('y haz que la '),
+                  InstructionsTextSpan().boldText('punta de la flecha '),
+                  InstructionsTextSpan().regularText('coincida con la '),
+                  InstructionsTextSpan().redText('linea roja. '),
+                  InstructionsTextSpan().regularText('Cuando la '),
+                  InstructionsTextSpan().redText('linea roja '),
+                  InstructionsTextSpan().boldText('se ponga '),
+                  InstructionsTextSpan().greenText('verde '),
+                  InstructionsTextSpan().regularText('será la orientación adecuada. \n'),
+                  
+                ])
+                ),
             assetLocation: 'assets/compass_icon.png')));
   }
 }

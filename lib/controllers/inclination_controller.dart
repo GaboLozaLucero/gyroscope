@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:degrees/pages/congrats_page.dart';
 import 'package:degrees/widgets/instructions.dart';
+import 'package:degrees/widgets/instructions_text_span.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/state_manager.dart';
@@ -110,48 +111,22 @@ class InclinationController extends GetxController {
           title: 'Giroscopio ',
           size: size,
           instruction: RichText(
+            textAlign: TextAlign.justify,
               text: TextSpan(
                   text: 'Pon el celular ',
                   style: TextStyle(color: Colors.black),
+                  
                   children: <TextSpan>[
-                TextSpan(
-                  text: 'sobre la antena ',
-                  style: TextStyle(fontWeight: FontWeight.bold),
-                ),
-                TextSpan(
-                  text: 'e inclina tu celular para hacer que el ',
-                ),
-                TextSpan(
-                  text: 'círculo rojo ',
-                  style:
-                      TextStyle(fontWeight: FontWeight.bold, color: Colors.red),
-                ),
-                TextSpan(
-                  text: 'concida con la ',
-                ),
-                TextSpan(
-                  text: 'meta, ',
-                  style: TextStyle(fontWeight: FontWeight.bold),
-                ),
-                TextSpan(
-                  text: 'cuando el ',
-                ),
-                TextSpan(
-                  text: 'círculo rojo ',
-                  style:
-                      TextStyle(fontWeight: FontWeight.bold, color: Colors.red),
-                ),
-                TextSpan(
-                  text: 'se ponga ',
-                ),
-                TextSpan(
-                  text: 'verde ',
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold, color: Colors.greenAccent),
-                ),
-                TextSpan(
-                  text: 'será la orientación adecuada. \n',
-                ),
+                InstructionsTextSpan().boldText('sobre la antena '),
+                InstructionsTextSpan().regularText('e inclina tu celular para hacer que el '),
+                InstructionsTextSpan().redText('círculo rojo '),
+                InstructionsTextSpan().regularText('coincida con la '),
+                InstructionsTextSpan().boldText('meta. '),
+                InstructionsTextSpan().regularText('Cuando el '),
+                InstructionsTextSpan().redText('círculo rojo '),
+                InstructionsTextSpan().regularText('se ponga '),
+                InstructionsTextSpan().greenText('verde '),
+                InstructionsTextSpan().regularText('será la orientación adecuada. \n'),
               ])),
           assetLocation: 'assets/inclination_icon.png'),
     ));

@@ -20,61 +20,65 @@ class HomePage extends StatelessWidget {
       body: Container(
         padding:
             EdgeInsets.symmetric(horizontal: size.width*0.069, vertical: size.height * 0.091),
-        child: Column(
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                _menuButton('assets/satellite_dish.png', 'Alinear Antena', size,
-                    () {
-                  Get.off(() => CompassPage(),
-                      transition: Transition.rightToLeft, arguments: [size]);
-                }),
-                Expanded(
-                    child: SizedBox(
-                  height: 0,
-                )),
-                _menuButton('assets/edit_devices.png', 'Editar Dispositivos',
-                    size, () {}),
-              ],
-            ),
-            SizedBox(
-              height: size.height * 0.055,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                _menuButton('assets/upgrade_device.png',
-                    'Actualizar Dispositivo', size, () {}),
-                Expanded(
-                    child: SizedBox(
-                  height: 0,
-                )),
-                _menuButton('assets/share.png', 'Nuestras redes y contactos',
-                    size, () {}),
-              ],
-            ),
-            SizedBox(
-              height: size.height * 0.093,
-            ),
-            OutlinedButton(
-              onPressed: () {},
-              child: Text('Ver tutorial'),
-              style: ButtonStyle(
-                minimumSize:
-                    MaterialStateProperty.all<Size>(Size(double.infinity, size.height*0.0525)),
-                foregroundColor:
-                    MaterialStateProperty.all<Color>(Colors.greenAccent),
-                side: MaterialStateProperty.all<BorderSide>(
-                    BorderSide(color: Colors.greenAccent, width: 4.0)),
-                shape:
-                    MaterialStateProperty.all<OutlinedBorder>(StadiumBorder()),
-              ),
-            )
-          ],
-        ),
+        child: _menu(size),
       ),
     );
+  }
+
+  Column _menu(Size size) {
+    return Column(
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              _menuButton('assets/satellite_dish.png', 'Alinear Antena', size,
+                  () {
+                Get.to(() => CompassPage(),
+                    transition: Transition.rightToLeft, arguments: [size]);
+              }),
+              Expanded(
+                  child: SizedBox(
+                height: 0,
+              )),
+              _menuButton('assets/edit_devices.png', 'Editar Dispositivos',
+                  size, () {}),
+            ],
+          ),
+          SizedBox(
+            height: size.height * 0.055,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              _menuButton('assets/upgrade_device.png',
+                  'Actualizar Dispositivo', size, () {}),
+              Expanded(
+                  child: SizedBox(
+                height: 0,
+              )),
+              _menuButton('assets/share.png', 'Nuestras redes y contactos',
+                  size, () {}),
+            ],
+          ),
+          SizedBox(
+            height: size.height * 0.093,
+          ),
+          OutlinedButton(
+            onPressed: () {},
+            child: Text('Ver tutorial'),
+            style: ButtonStyle(
+              minimumSize:
+                  MaterialStateProperty.all<Size>(Size(double.infinity, size.height*0.0525)),
+              foregroundColor:
+                  MaterialStateProperty.all<Color>(Colors.greenAccent),
+              side: MaterialStateProperty.all<BorderSide>(
+                  BorderSide(color: Colors.greenAccent, width: 4.0)),
+              shape:
+                  MaterialStateProperty.all<OutlinedBorder>(StadiumBorder()),
+            ),
+          )
+        ],
+      );
   }
 
   Widget _menuButton(String asset, String description, Size size,

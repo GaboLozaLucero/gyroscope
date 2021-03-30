@@ -33,6 +33,7 @@ dependencies:
   vibrate: ^0.0.4
   flutter_compass: ^0.6.0
   flutter_svg: ^0.19.3
+  rive: ^0.6.8
 
 dev_dependencies:
   flutter_test:

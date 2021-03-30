@@ -11,8 +11,8 @@ class InclinationPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     //Change size value to Get.arguments after refactor this page
+    //final size = Size(411.4, 798.9);
     final Size size = Get.arguments[0];
-      //final size = Size(411.4, 798.9);
     return GetBuilder(
       init: InclinationController(),
       builder: (_) {
@@ -31,35 +31,38 @@ class InclinationPage extends StatelessWidget {
         ),
         body: SafeArea(
           child: Stack(
-            children: [           
-              BackgroundBorder(size: size),
-              Positioned(
-                top: size.height*0.2766,
-                left: size.width*0.1653,
-                child: ClipPath(
-                  clipper: TrapezoidClipper(),
-
-                  child: Container(
-                  width: size.width*0.667,
-                  height: size.height*0.425,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    color: Colors.black
-                  ),
-                ),
-                              ),
-              ),
-              StepIcon(size: size, 
-              image: AssetImage('assets/inclination_icon.png'), 
-              step: 2, onTap: ()=>_.instructions(size)),
-              _goal(size),
-              _ball(size),
-              _button(size),
-            ],
+            children: inclinationContainer(size, _),
           ),
         ),
       );}
     );
+  }
+
+  List<Widget> inclinationContainer(Size size, _) {
+    return [           
+            BackgroundBorder(size: size),
+            Positioned(
+              top: size.height*0.2766,
+              left: size.width*0.1653,
+              child: ClipPath(
+                clipper: TrapezoidClipper(),
+                child: Container(
+                width: size.width*0.667,
+                height: size.height*0.425,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  color: Colors.black
+                ),
+              ),
+                            ),
+            ),
+            StepIcon(size: size, 
+            image: AssetImage('assets/inclination_icon.png'), 
+            step: 2, onTap: ()=>_.instructions(size)),
+            _goal(size),
+            _ball(size),
+            _button(size),
+          ];
   }
 
   Widget _button(Size size) {
