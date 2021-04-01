@@ -44,17 +44,13 @@ class CongratsController extends GetxController {
         if (file.import(data)) {
           final artboard = file.mainArtboard;
           artboard.addController(_controller = SimpleAnimation('Loading'));
-          _controller.isActiveChanged.addListener(() {
-          if (!_controller.isActive) {           
-            _riveArtboard = null;
-            
-          } 
-        });
 
           _riveArtboard = artboard;
            
           update();
               }});
-              }}
+              }
+              
+              }
   
   

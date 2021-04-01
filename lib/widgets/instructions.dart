@@ -50,7 +50,7 @@ class Instructions extends StatelessWidget {
                   style: TextStyle(fontWeight: FontWeight.bold),
                 ),
                 SizedBox(
-                  height: 10.0,
+                  height: 1.0,
                 ),
                 Container(width: double.infinity, child: instruction),
                 Text(

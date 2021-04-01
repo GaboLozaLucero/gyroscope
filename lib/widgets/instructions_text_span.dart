@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class InstructionsTextSpan {
   InstructionsTextSpan();
@@ -6,25 +7,25 @@ class InstructionsTextSpan {
   TextSpan regularText(String text){
     return TextSpan(
         text: text,
-        style: TextStyle(color: Colors.black),
+        style: GoogleFonts.quicksand(color: Colors.black,),
     );
   }
   TextSpan boldText(String text){
     return TextSpan(
         text: text,
-        style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+        style: GoogleFonts.quicksand(color: Colors.black, fontWeight: FontWeight.bold),
     );
   }
   TextSpan redText(String text){
     return TextSpan(
         text: text,
-        style: TextStyle(color: Colors.red, fontWeight: FontWeight.bold),
+        style: GoogleFonts.quicksand(color: Colors.red, fontWeight: FontWeight.bold),
     );
   }
   TextSpan greenText(String text){
     return TextSpan(
         text: text,
-        style: TextStyle(color: Colors.greenAccent, fontWeight: FontWeight.bold),
+        style: GoogleFonts.quicksand(color: Colors.greenAccent, fontWeight: FontWeight.bold),
     );
   }
 
