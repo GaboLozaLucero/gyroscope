@@ -3,6 +3,7 @@ import 'package:degrees/pages/compass_page.dart';
 import 'package:degrees/pages/inclination_page.dart';
 import 'package:degrees/widgets/background_border.dart';
 import 'package:get/state_manager.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:rive/rive.dart';
 import 'package:degrees/widgets/next_button.dart';
 import 'package:flutter/material.dart';
@@ -16,7 +17,7 @@ class CongratsPage extends StatelessWidget {
     // final size = Size(411.4, 798.9);
     return Scaffold(
       appBar: AppBar(
-          title: Text('BestSat', style: TextStyle(fontSize: 20),),
+          title: Text('BestSat', style: GoogleFonts.quicksand(fontSize: 20, fontWeight: FontWeight.bold) ),
           centerTitle: true,
         ),
       body: SafeArea(

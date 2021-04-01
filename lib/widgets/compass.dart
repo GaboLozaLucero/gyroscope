@@ -23,7 +23,7 @@ class Compass extends StatelessWidget {
       child: Stack(
 
               children: [
-          Center(child: SvgPicture.asset('assets/cardinal_points.svg'),),
+          Center(child: SvgPicture.asset('assets/compass.svg'),),
           Center(
           child: _valueBall(),
         ),]
@@ -37,7 +37,7 @@ class Compass extends StatelessWidget {
       child: Stack(children: [
         Center(
             child: SvgPicture.asset(
-          'assets/compass.svg',
+          'assets/needle.svg',
           height: size.height * 0.15,
           color: color,
         )),

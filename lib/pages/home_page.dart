@@ -1,13 +1,14 @@
 import 'package:degrees/pages/compass_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/route_manager.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final Size size0 = MediaQuery.of(context).size;
     final appBar = AppBar(
-      title: Text('BestSat', style: TextStyle(fontSize: 20),),
+      title: Text('BestSat', style: GoogleFonts.quicksand(fontSize: 20, fontWeight: FontWeight.bold) ),
       centerTitle: true,
     );
     final height = MediaQuery.of(context).size.height -

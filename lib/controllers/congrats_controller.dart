@@ -15,10 +15,10 @@ class CongratsController extends GetxController {
   void onInit() {
    
     super.onInit();
-    _loadAnimation();
+    _rocketLaunch();
   }
 
-  void _loadAnimation() { rootBundle.load('assets/rocket_reload.riv').then(
+  void _rocketLaunch() { rootBundle.load('assets/rocket_reload.riv').then(
       (data) async {
         final file = RiveFile();
         if (file.import(data)) {
@@ -26,9 +26,8 @@ class CongratsController extends GetxController {
           artboard.addController(_controller = SimpleAnimation('Trigger'));
           _controller.isActiveChanged.addListener(() {
           if (!_controller.isActive) {           
-            artboard.removeController(_controller);
-            _controller = SimpleAnimation('Loading');
-          artboard.addController(_controller);
+            _riveArtboard = null;
+            _inOrbit();
           } 
         });
 
@@ -38,4 +37,24 @@ class CongratsController extends GetxController {
         }
       },
     );}
-  }
+
+  void _inOrbit() { rootBundle.load('assets/rocket_reload.riv').then(
+      (data) async {
+        final file = RiveFile();
+        if (file.import(data)) {
+          final artboard = file.mainArtboard;
+          artboard.addController(_controller = SimpleAnimation('Loading'));
+          _controller.isActiveChanged.addListener(() {
+          if (!_controller.isActive) {           
+            _riveArtboard = null;
+            
+          } 
+        });
+
+          _riveArtboard = artboard;
+           
+          update();
+              }});
+              }}
+  
+  

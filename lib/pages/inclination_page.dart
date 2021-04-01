@@ -6,6 +6,7 @@ import 'package:degrees/widgets/step_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:get/state_manager.dart';
 import 'package:get/route_manager.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class InclinationPage extends StatelessWidget {
   @override
@@ -19,7 +20,7 @@ class InclinationPage extends StatelessWidget {
         _.bodySize(size);
          return Scaffold(
         appBar: AppBar(
-          title: Text('BestSat', style: TextStyle(fontSize: 20),),
+          title: Text('BestSat', style: GoogleFonts.quicksand(fontSize: 20, fontWeight: FontWeight.bold) ),
           centerTitle: true,
           actions: [
             IconButton(
