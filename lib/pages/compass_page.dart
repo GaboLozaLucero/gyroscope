@@ -38,7 +38,7 @@ class CompassPage extends StatelessWidget {
           BackgroundBorder(size: size),
           StepIcon(
           size: size, 
-          step: 1,
+          step: 2,
           image: AssetImage('assets/compass_icon.png'),
           onTap: (){_.instructions(size);},
           ),

@@ -26,7 +26,7 @@ class StepIcon extends StatelessWidget {
           style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),),
           SizedBox(height: size.height*0.008, width: double.infinity,),
           GestureDetector(
-            child: Image(image: image),
+            child: Image(image: image, width: size.width*0.16,),
             onTap: onTap)
         ],
       ),

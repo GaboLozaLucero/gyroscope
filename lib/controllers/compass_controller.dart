@@ -41,7 +41,7 @@ class CompassController extends GetxController {
           Vibrate.feedback(FeedbackType.success);
           _ballColor = Colors.greenAccent;
           _buttonActivation = true;
-          _btnText = 'Ir al paso 2';
+          _btnText = 'Ir al paso 3';
         } else {
           _ballColor = Colors.redAccent;
           _buttonActivation = false;
@@ -105,7 +105,7 @@ class CompassController extends GetxController {
             borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
             color: Colors.white),
         child: Instructions(
-            step: 1,
+            step: 2,
             title: 'Brújula',
             size: size,
             instruction: RichText(

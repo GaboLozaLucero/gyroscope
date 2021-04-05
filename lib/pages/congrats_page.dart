@@ -1,6 +1,7 @@
 import 'package:degrees/controllers/congrats_controller.dart';
 import 'package:degrees/pages/compass_page.dart';
 import 'package:degrees/pages/inclination_page.dart';
+import 'package:degrees/pages/lnbf_page.dart';
 import 'package:degrees/widgets/background_border.dart';
 import 'package:get/state_manager.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -60,7 +61,7 @@ class CongratsPage extends StatelessWidget {
                     activated: true,          
                     nextPage: InclinationPage(),
                     onPressed: () =>
-                    Get.off(() => CompassPage(), transition: Transition.zoom, arguments: [size]),
+                    Get.off(() => LnbfPage(), transition: Transition.zoom, arguments: [size]),
                     message: 'Volver a Empezar',
                     size: size,
                     )

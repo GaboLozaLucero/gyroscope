@@ -54,17 +54,17 @@ class LnbfController extends GetxController {
           instruction: RichText(
             textAlign: TextAlign.justify,
               text: TextSpan(
-                  text: 'Imagina que la parte inferior del ',
+                  text: 'Utilizando el plato de la antena, ajusta el ',
                   style: GoogleFonts.quicksand(color: Colors.black),
                   
                   children: <TextSpan>[
                 InstructionsTextSpan().boldText('LNBF '),
-                InstructionsTextSpan().regularText('es una manecilla de reloj y gírala hasta que ésta apunte a los '),
-                InstructionsTextSpan().boldText('22 '),
-                InstructionsTextSpan().regularText('minutos. Cuando hayas finalizado, presiona el botón verde para continuar\n'),
+                InstructionsTextSpan().regularText('para que el cable coaxial se ajuste a '),
+                InstructionsTextSpan().boldText('30 grados'),
+                InstructionsTextSpan().regularText(', puedes utlizar esta imagen para guiarte. Cuando hayas finalizado, presiona el botón verde para continuar\n'),
                 
               ])),
-          assetLocation: 'assets/inclination_icon.png'),
+          assetLocation: 'assets/lnbf_icon.png'),
     ));
   }
 }

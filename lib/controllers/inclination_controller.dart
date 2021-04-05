@@ -107,7 +107,7 @@ class InclinationController extends GetxController {
           borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
           color: Colors.white),
       child: Instructions(
-          step: 2,
+          step: 3,
           title: 'Giroscopio ',
           size: size,
           instruction: RichText(

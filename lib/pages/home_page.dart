@@ -1,4 +1,5 @@
 import 'package:degrees/pages/compass_page.dart';
+import 'package:degrees/pages/lnbf_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/route_manager.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -34,7 +35,7 @@ class HomePage extends StatelessWidget {
             children: [
               _menuButton('assets/satellite_dish.png', 'Alinear Antena', size,
                   () {
-                Get.to(() => CompassPage(),
+                Get.to(() => LnbfPage(),
                     transition: Transition.rightToLeft, arguments: [size]);
               }),
               Expanded(

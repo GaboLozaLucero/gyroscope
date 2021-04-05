@@ -59,7 +59,7 @@ class InclinationPage extends StatelessWidget {
             ),
             StepIcon(size: size, 
             image: AssetImage('assets/inclination_icon.png'), 
-            step: 2, onTap: ()=>_.instructions(size)),
+            step: 3, onTap: ()=>_.instructions(size)),
             _goal(size),
             _ball(size),
             _button(size),
